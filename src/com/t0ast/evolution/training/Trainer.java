@@ -6,6 +6,7 @@
 package com.t0ast.evolution.training;
 
 import com.t0ast.evolution.entities.Entity;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,19 @@ import com.t0ast.evolution.entities.Entity;
 public class Trainer<E extends Entity, R extends TrainingResults>
 {
     private TrainingEnvironment<E, R> environment;
+    private FitnessRater<R> rater;
+    
+    public void train(E entity)
+    {
+        if(entity.isTested()) return;
+        R result = this.environment.train(entity);
+        float fitness = this.rater.rate(result);
+        entity.setFitness(fitness);
+        entity.setTested(true);
+    }
+    
+    public void trainGeneration(List<E> entities)
+    {
+        entities.forEach(this::train);
+    }
 }

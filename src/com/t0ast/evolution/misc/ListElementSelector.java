@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.t0ast.evolution.entities.instructional;
+package com.t0ast.evolution.misc;
+
+import java.util.List;
 
 /**
  *
  * @author T0astBread
  */
-public interface Instruction
+public interface ListElementSelector
 {
-
-    /**
-     *
-     * @return itself for method chaining
-     */
-    Instruction randomizeValue();
+    <T> T selectFrom(List<T> list);
+    int selectIndex(List list);
 }

@@ -9,9 +9,10 @@ package com.t0ast.evolution.entities;
  *
  * @author T0astBread
  */
-public abstract class Entity
+public abstract class Entity implements Comparable<Entity>
 {
     private float fitness;
+    private boolean tested;
 
     public float getFitness()
     {
@@ -21,5 +22,21 @@ public abstract class Entity
     public void setFitness(float fitness)
     {
         this.fitness = fitness;
+    }
+
+    public boolean isTested()
+    {
+        return tested;
+    }
+
+    public void setTested(boolean tested)
+    {
+        this.tested = tested;
+    }
+
+    @Override
+    public int compareTo(Entity o)
+    {
+        return Float.compare(this.fitness, o.fitness);
     }
 }

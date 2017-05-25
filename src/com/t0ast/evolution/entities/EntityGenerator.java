@@ -3,18 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.t0ast.evolution.entities.instructional;
+package com.t0ast.evolution.entities;
 
 /**
  *
  * @author T0astBread
  */
-public interface Instruction
+public interface EntityGenerator
 {
-
-    /**
-     *
-     * @return itself for method chaining
-     */
-    Instruction randomizeValue();
+    Entity generateRandomEntity();
 }

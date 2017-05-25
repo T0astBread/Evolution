@@ -16,6 +16,7 @@ import java.util.List;
 public class InstructionalEntity extends Entity
 {
     private List<Instruction> instructions;
+    private int maxAmountOfInstructions;
 
     public InstructionalEntity()
     {
@@ -25,5 +26,15 @@ public class InstructionalEntity extends Entity
     public List<Instruction> getInstructions()
     {
         return instructions;
+    }
+
+    public int getMaxAmountOfInstructions()
+    {
+        return maxAmountOfInstructions;
+    }
+
+    public void setMaxAmountOfInstructions(int maxAmountOfInstructions)
+    {
+        this.maxAmountOfInstructions = maxAmountOfInstructions;
     }
 }
