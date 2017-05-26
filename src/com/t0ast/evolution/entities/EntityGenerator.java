@@ -9,7 +9,7 @@ package com.t0ast.evolution.entities;
  *
  * @author T0astBread
  */
-public interface EntityGenerator
+public interface EntityGenerator<E extends Entity>
 {
-    Entity generateRandomEntity();
+    E generateRandomEntity();
 }

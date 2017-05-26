@@ -14,8 +14,12 @@ import com.t0ast.evolution.entities.EntityGenerator;
  */
 public class InstructionalEntityGenerator implements EntityGenerator
 {
-
     private InstructionGenerator instructionGenerator;
+
+    public InstructionalEntityGenerator(InstructionGenerator instructionGenerator)
+    {
+        this.instructionGenerator = instructionGenerator;
+    }
 
     @Override
     public Entity generateRandomEntity()

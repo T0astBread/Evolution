@@ -16,6 +16,12 @@ public class Trainer<E extends Entity, R extends TrainingResults>
 {
     private TrainingEnvironment<E, R> environment;
     private FitnessRater<R> rater;
+
+    public Trainer(TrainingEnvironment<E, R> environment, FitnessRater<R> rater)
+    {
+        this.environment = environment;
+        this.rater = rater;
+    }
     
     public void train(E entity)
     {

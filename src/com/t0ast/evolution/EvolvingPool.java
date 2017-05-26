@@ -6,6 +6,7 @@
 package com.t0ast.evolution;
 
 import com.t0ast.evolution.entities.Entity;
+import com.t0ast.evolution.entities.EntityGenerator;
 import com.t0ast.evolution.entities.Mutator;
 import com.t0ast.evolution.misc.ListElementSelector;
 import com.t0ast.evolution.training.Trainer;
@@ -21,10 +22,32 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
 {
     private List<E> entities;
     private Trainer<E, R> trainer;
-    private Mutator<E> mutator;
     private int entitiesInGeneration, deathsPerGeneration;
     private ListElementSelector killSelector, breedingSelector;
+    private Mutator<E> mutator;
     private MutationType mutationType;
+    private EntityGenerator<E> generator;
+
+    public EvolvingPool(Trainer<E, R> trainer, int entitiesInGeneration, int deathsPerGeneration, ListElementSelector killSelector, ListElementSelector breedingSelector, Mutator<E> mutator, MutationType mutationType, EntityGenerator<E> generator)
+    {
+        this.trainer = trainer;
+        this.entitiesInGeneration = entitiesInGeneration;
+        this.deathsPerGeneration = deathsPerGeneration;
+        this.killSelector = killSelector;
+        this.breedingSelector = breedingSelector;
+        this.mutator = mutator;
+        this.mutationType = mutationType;
+        this.generator = generator;
+    }
+    
+    public EvolvingPool<E, R> initialize()
+    {
+        for(int i = 0; i < this.entitiesInGeneration; i++)
+        {
+            this.entities.add(this.generator.generateRandomEntity());
+        }
+        return this;
+    }
     
     public void nextGen()
     {
