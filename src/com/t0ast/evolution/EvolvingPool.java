@@ -12,7 +12,9 @@ import com.t0ast.evolution.misc.ListElementSelector;
 import com.t0ast.evolution.training.Trainer;
 import com.t0ast.evolution.training.TrainingResults;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -27,6 +29,7 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
     private Mutator<E> mutator;
     private MutationType mutationType;
     private EntityGenerator<E> generator;
+    private Set<Entity> haveBeenReproducingInThisGeneration;
 
     public EvolvingPool(Trainer<E, R> trainer, int entitiesInGeneration, int deathsPerGeneration, ListElementSelector killSelector, ListElementSelector breedingSelector, Mutator<E> mutator, MutationType mutationType, EntityGenerator<E> generator)
     {
@@ -39,6 +42,7 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
         this.mutator = mutator;
         this.mutationType = mutationType;
         this.generator = generator;
+        this.haveBeenReproducingInThisGeneration = new HashSet<>();
     }
     
     public EvolvingPool<E, R> initialize()
@@ -68,11 +72,19 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
                 newEntitiesTemp.add(this.mutator.mutate(selectForBreeding(), selectForBreeding()));
         }
         this.entities.addAll(newEntitiesTemp);
+        this.haveBeenReproducingInThisGeneration.clear();
     }
     
     private E selectForBreeding()
     {
-        return this.breedingSelector.selectFrom(this.entities);
+        E selected = null;
+        do
+        {
+            selected = this.breedingSelector.selectFrom(this.entities);
+        }
+        while(!this.haveBeenReproducingInThisGeneration.contains(selected));
+        this.haveBeenReproducingInThisGeneration.add(selected);
+        return selected;
     }
     
     public static enum MutationType
