@@ -17,4 +17,16 @@ public interface Instruction
      * @return itself for method chaining
      */
     Instruction randomizeValue();
+    
+    /**
+     * Returns this instruction's name (f.ex. "MOVE")
+     * @return 
+     */
+    String getInstructionName();
+    
+    /**
+     * Returns a String representation of this instruction (f.ex. "MOVE 3")
+     * @return 
+     */
+    String getInstructionString();
 }

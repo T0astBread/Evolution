@@ -3,14 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.t0ast.evolution.entities;
+package com.t0ast.evolution.misc;
 
 /**
  *
  * @author T0astBread
  */
-public interface Mutator<E extends Entity>
+public class Utils
 {
-    E mutate(E entity);
-    E mutate(E parent1, E parent2);
+    public static int clamp(int n, int max, int min)
+    {
+        if(n > max) n = max;
+        else if(n < min) n = min;
+        return n;
+    }
 }

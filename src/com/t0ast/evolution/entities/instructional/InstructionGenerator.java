@@ -7,6 +7,8 @@ package com.t0ast.evolution.entities.instructional;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,9 +28,17 @@ public class InstructionGenerator
         this.instructionClasses.add(clazz);
     }
     
-    public Instruction getRandomInstruction() throws ReflectiveOperationException
+    public Instruction getRandomInstruction()
     {
-        return getRandomClass().newInstance().randomizeValue();
+        try
+        {
+            return getRandomClass().newInstance().randomizeValue();
+        }
+        catch(ReflectiveOperationException ex)
+        {
+            Logger.getLogger(InstructionGenerator.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException(ex);
+        }
     }
     
     private Class<? extends Instruction> getRandomClass()

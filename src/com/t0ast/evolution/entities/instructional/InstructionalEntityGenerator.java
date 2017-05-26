@@ -14,6 +14,7 @@ import com.t0ast.evolution.entities.EntityGenerator;
  */
 public class InstructionalEntityGenerator implements EntityGenerator
 {
+
     private InstructionGenerator instructionGenerator;
 
     @Override
@@ -23,16 +24,9 @@ public class InstructionalEntityGenerator implements EntityGenerator
         int amountOfInstructions = (int) (Math.random() * entity.getMaxAmountOfInstructions());
         for(int i = 0; i < amountOfInstructions; i++)
         {
-            try
-            {
-                entity.getInstructions().add(this.instructionGenerator.getRandomInstruction());
-            }
-            catch(ReflectiveOperationException ex)
-            {
-                throw new RuntimeException(ex);
-            }
+            entity.getInstructions().add(this.instructionGenerator.getRandomInstruction());
         }
         return entity;
     }
-    
+
 }

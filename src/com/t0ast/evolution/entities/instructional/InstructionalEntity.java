@@ -27,6 +27,11 @@ public class InstructionalEntity extends Entity
     {
         return instructions;
     }
+    
+    public int getInstructionSize()
+    {
+        return this.instructions.size();
+    }
 
     public int getMaxAmountOfInstructions()
     {
@@ -36,5 +41,16 @@ public class InstructionalEntity extends Entity
     public void setMaxAmountOfInstructions(int maxAmountOfInstructions)
     {
         this.maxAmountOfInstructions = maxAmountOfInstructions;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder s = new StringBuilder(super.toString());
+        this.instructions.forEach(i ->
+        {
+            s.append(i.getInstructionString()).append("\n");
+        });
+        return s.toString();
     }
 }

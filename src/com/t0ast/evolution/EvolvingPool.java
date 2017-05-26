@@ -10,6 +10,7 @@ import com.t0ast.evolution.entities.Mutator;
 import com.t0ast.evolution.misc.ListElementSelector;
 import com.t0ast.evolution.training.Trainer;
 import com.t0ast.evolution.training.TrainingResults;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,9 +21,10 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
 {
     private List<E> entities;
     private Trainer<E, R> trainer;
-    private Mutator mutator;
+    private Mutator<E> mutator;
     private int entitiesInGeneration, deathsPerGeneration;
-    private ListElementSelector selector;
+    private ListElementSelector killSelector, breedingSelector;
+    private MutationType mutationType;
     
     public void nextGen()
     {
@@ -30,11 +32,27 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
         this.entities.sort(null);
         for(int i = 0; i < this.deathsPerGeneration; i++)
         {
-            this.entities.remove(this.selector.selectIndex(this.entities));
+            this.entities.remove(this.killSelector.selectIndex(this.entities));
         }
-        while(this.entities.size() < this.entitiesInGeneration)
+        
+        List<E> newEntitiesTemp = new ArrayList<>();
+        for(int i = this.entities.size(); i < this.entitiesInGeneration; i++)
         {
-            this.entities.add(null); //Add randomly generated entity here
+            if(this.mutationType == MutationType.SINGLE_PARENT)
+                newEntitiesTemp.add(this.mutator.mutate(selectForBreeding()));
+            else if(this.mutationType == MutationType.DOUBLE_PARENT)
+                newEntitiesTemp.add(this.mutator.mutate(selectForBreeding(), selectForBreeding()));
         }
+        this.entities.addAll(newEntitiesTemp);
+    }
+    
+    private E selectForBreeding()
+    {
+        return this.breedingSelector.selectFrom(this.entities);
+    }
+    
+    public static enum MutationType
+    {
+        SINGLE_PARENT, DOUBLE_PARENT
     }
 }
