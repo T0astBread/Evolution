@@ -5,6 +5,7 @@
  */
 package com.t0ast.evolution.entities.instructional;
 
+import com.t0ast.evolution.entities.instructional.instructions.Instruction;
 import com.t0ast.evolution.entities.Entity;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,12 @@ public class InstructionalEntity extends Entity
     public InstructionalEntity()
     {
         this.instructions = new ArrayList<>();
+    }
+
+    public InstructionalEntity(int maxAmountOfInstructions)
+    {
+        this();
+        this.maxAmountOfInstructions = maxAmountOfInstructions;
     }
 
     public List<Instruction> getInstructions()
@@ -52,5 +59,13 @@ public class InstructionalEntity extends Entity
             s.append(i.getInstructionString()).append("\n");
         });
         return s.toString();
+    }
+
+    @Override
+    public Entity duplicate()
+    {
+        InstructionalEntity e = new InstructionalEntity(this.maxAmountOfInstructions);
+        e.instructions.addAll(this.instructions);
+        return e;
     }
 }

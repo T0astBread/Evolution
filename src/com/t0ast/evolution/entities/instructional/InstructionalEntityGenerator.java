@@ -5,26 +5,34 @@
  */
 package com.t0ast.evolution.entities.instructional;
 
-import com.t0ast.evolution.entities.Entity;
 import com.t0ast.evolution.entities.EntityGenerator;
 
 /**
  *
  * @author T0astBread
  */
-public class InstructionalEntityGenerator implements EntityGenerator
+public class InstructionalEntityGenerator<E extends InstructionalEntity> implements EntityGenerator<E>
 {
+
+    private final E emptyEntity;
     private InstructionGenerator instructionGenerator;
 
-    public InstructionalEntityGenerator(InstructionGenerator instructionGenerator)
+    /**
+     *
+     * @param emptyEntity
+     * @param instructionGenerator
+     */
+    public InstructionalEntityGenerator(E emptyEntity, InstructionGenerator instructionGenerator)
     {
+        this.emptyEntity = emptyEntity;
+        this.emptyEntity.getInstructions().clear();
         this.instructionGenerator = instructionGenerator;
     }
 
     @Override
-    public Entity generateRandomEntity()
+    public E generateRandomEntity()
     {
-        InstructionalEntity entity = new InstructionalEntity();
+        E entity = (E) this.emptyEntity.duplicate();
         int amountOfInstructions = (int) (Math.random() * entity.getMaxAmountOfInstructions());
         for(int i = 0; i < amountOfInstructions; i++)
         {

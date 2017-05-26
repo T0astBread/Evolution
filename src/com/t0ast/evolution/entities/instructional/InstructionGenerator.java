@@ -5,6 +5,7 @@
  */
 package com.t0ast.evolution.entities.instructional;
 
+import com.t0ast.evolution.entities.instructional.instructions.Instruction;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;

@@ -9,7 +9,7 @@ package com.t0ast.evolution.entities;
  *
  * @author T0astBread
  */
-public abstract class Entity implements Comparable<Entity>, Cloneable
+public abstract class Entity implements Comparable<Entity>
 {
     private float fitness;
     private boolean tested;
@@ -40,15 +40,5 @@ public abstract class Entity implements Comparable<Entity>, Cloneable
         return Float.compare(this.fitness, o.fitness);
     }
     
-    public Object clone()
-    {
-        try
-        {
-            return super.clone();
-        }
-        catch(CloneNotSupportedException ex)
-        {
-            return null;
-        }
-    }
+    public abstract Entity duplicate();
 }

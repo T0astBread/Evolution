@@ -23,7 +23,7 @@ public class InstructionalMutator<E extends InstructionalEntity> implements Muta
     @Override
     public E mutate(E entity)
     {
-        entity = (E) entity.clone();
+        entity = (E) entity.duplicate();
         int inst = entity.getInstructionSize(), newInstructionSize = Utils.clamp(inst + getDeltaInstructionSize(inst), entity.getMaxAmountOfInstructions(), 0);
         while(entity.getInstructionSize() != newInstructionSize) //Remove or add new instructions
         {

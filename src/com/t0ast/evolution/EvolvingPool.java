@@ -30,6 +30,7 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
 
     public EvolvingPool(Trainer<E, R> trainer, int entitiesInGeneration, int deathsPerGeneration, ListElementSelector killSelector, ListElementSelector breedingSelector, Mutator<E> mutator, MutationType mutationType, EntityGenerator<E> generator)
     {
+        this.entities = new ArrayList<>(entitiesInGeneration);
         this.trainer = trainer;
         this.entitiesInGeneration = entitiesInGeneration;
         this.deathsPerGeneration = deathsPerGeneration;
