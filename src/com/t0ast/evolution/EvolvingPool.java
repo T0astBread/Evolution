@@ -8,8 +8,8 @@ package com.t0ast.evolution;
 import com.t0ast.evolution.entities.Entity;
 import com.t0ast.evolution.entities.EntityGenerator;
 import com.t0ast.evolution.entities.Mutator;
-import com.t0ast.evolution.misc.ListElementSelector;
-import com.t0ast.evolution.training.Trainer;
+import com.t0ast.evolution.misc.selectors.ListElementSelector;
+import com.t0ast.evolution.training.trainers.Trainer;
 import com.t0ast.evolution.training.TrainingResults;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,7 +23,7 @@ import java.util.Set;
 public class EvolvingPool<E extends Entity, R extends TrainingResults>
 {
     private List<E> entities;
-    private Trainer<E, R> trainer;
+    private Trainer<E> trainer;
     private int entitiesInGeneration, deathsPerGeneration;
     private ListElementSelector killSelector, breedingSelector;
     private Mutator<E> mutator;
@@ -31,7 +31,7 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
     private EntityGenerator<E> generator;
     private Set<Entity> haveBeenReproducingInThisGeneration;
 
-    public EvolvingPool(Trainer<E, R> trainer, int entitiesInGeneration, int deathsPerGeneration, ListElementSelector killSelector, ListElementSelector breedingSelector, Mutator<E> mutator, MutationType mutationType, EntityGenerator<E> generator)
+    public EvolvingPool(Trainer<E> trainer, int entitiesInGeneration, int deathsPerGeneration, ListElementSelector killSelector, ListElementSelector breedingSelector, Mutator<E> mutator, MutationType mutationType, EntityGenerator<E> generator)
     {
         this.entities = new ArrayList<>(entitiesInGeneration);
         this.trainer = trainer;
@@ -82,9 +82,14 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
         {
             selected = this.breedingSelector.selectFrom(this.entities);
         }
-        while(!this.haveBeenReproducingInThisGeneration.contains(selected));
+        while(this.haveBeenReproducingInThisGeneration.contains(selected));
         this.haveBeenReproducingInThisGeneration.add(selected);
         return selected;
+    }
+
+    public List<E> getEntities()
+    {
+        return entities;
     }
     
     public static enum MutationType

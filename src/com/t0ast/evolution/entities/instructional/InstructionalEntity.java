@@ -60,7 +60,7 @@ public class InstructionalEntity extends Entity
         });
         return s.toString();
     }
-
+    
     @Override
     public Entity duplicate()
     {

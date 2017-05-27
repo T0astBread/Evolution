@@ -28,6 +28,11 @@ public abstract class IntInstruction implements Instruction
         return this;
     }
 
+    public int getValue()
+    {
+        return value;
+    }
+
     @Override
     public String getInstructionName()
     {

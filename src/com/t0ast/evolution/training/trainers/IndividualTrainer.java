@@ -3,21 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.t0ast.evolution.training;
+package com.t0ast.evolution.training.trainers;
 
 import com.t0ast.evolution.entities.Entity;
+import com.t0ast.evolution.training.FitnessRater;
+import com.t0ast.evolution.training.TrainingResults;
 import java.util.List;
+import com.t0ast.evolution.training.trainers.environments.IndividualTrainingEnvironment;
 
 /**
- *
+ * Trains one entity and the moves to the next
  * @author T0astBread
  */
-public class Trainer<E extends Entity, R extends TrainingResults>
+public class IndividualTrainer<E extends Entity, R extends TrainingResults> implements Trainer<E>
 {
-    private TrainingEnvironment<E, R> environment;
+    private IndividualTrainingEnvironment<E, R> environment;
     private FitnessRater<R> rater;
 
-    public Trainer(TrainingEnvironment<E, R> environment, FitnessRater<R> rater)
+    public IndividualTrainer(IndividualTrainingEnvironment<E, R> environment, FitnessRater<R> rater)
     {
         this.environment = environment;
         this.rater = rater;
@@ -32,6 +35,7 @@ public class Trainer<E extends Entity, R extends TrainingResults>
         entity.setTested(true);
     }
     
+    @Override
     public void trainGeneration(List<E> entities)
     {
         entities.forEach(this::train);

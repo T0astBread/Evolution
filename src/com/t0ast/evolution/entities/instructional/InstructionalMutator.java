@@ -6,7 +6,7 @@
 package com.t0ast.evolution.entities.instructional;
 
 import com.t0ast.evolution.entities.Mutator;
-import com.t0ast.evolution.misc.ListElementSelector;
+import com.t0ast.evolution.misc.selectors.ListElementSelector;
 import com.t0ast.evolution.misc.Utils;
 
 /**
@@ -19,6 +19,12 @@ public class InstructionalMutator<E extends InstructionalEntity> implements Muta
     
     private InstructionGenerator generator;
     private ListElementSelector selector;
+
+    public InstructionalMutator(InstructionGenerator generator, ListElementSelector selector)
+    {
+        this.generator = generator;
+        this.selector = selector;
+    }
     
     @Override
     public E mutate(E entity)

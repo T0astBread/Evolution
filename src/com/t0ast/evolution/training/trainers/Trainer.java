@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.t0ast.evolution.misc;
+package com.t0ast.evolution.training.trainers;
 
+import com.t0ast.evolution.entities.Entity;
 import java.util.List;
 
 /**
  *
  * @author T0astBread
  */
-public interface ListElementSelector
+public interface Trainer<E extends Entity>
 {
-    <T> T selectFrom(List<T> list);
-    int selectIndex(List list);
+    void trainGeneration(List<E> entities);
 }

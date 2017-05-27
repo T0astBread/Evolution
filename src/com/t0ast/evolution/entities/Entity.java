@@ -40,5 +40,9 @@ public abstract class Entity implements Comparable<Entity>
         return Float.compare(this.fitness, o.fitness);
     }
     
+    /**
+     * IMPORTANT: If you make a subclass of Entity or of a subclass of Entity, always override this!
+     * @return 
+     */
     public abstract Entity duplicate();
 }
