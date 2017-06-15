@@ -69,7 +69,7 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
             if(this.mutationType == MutationType.SINGLE_PARENT)
                 newEntitiesTemp.add(this.mutator.mutate(selectForBreeding()));
             else if(this.mutationType == MutationType.DOUBLE_PARENT)
-                newEntitiesTemp.add(this.mutator.mutate(selectForBreeding(), selectForBreeding()));
+                newEntitiesTemp.add(this.mutator.mutate(selectForBreedingDouble(), selectForBreedingDouble())); //selectForBreeding nimmt jeden entity nur einmal dran - PROGLEM!!
         }
         this.entities.addAll(newEntitiesTemp);
         this.haveBeenReproducingInThisGeneration.clear();
@@ -85,6 +85,12 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
         while(this.haveBeenReproducingInThisGeneration.contains(selected));
         this.haveBeenReproducingInThisGeneration.add(selected);
         return selected;
+    }
+    
+    private E selectForBreedingDouble()
+    {
+        return this.breedingSelector.selectFrom(entities);
+        
     }
 
     public List<E> getEntities()
