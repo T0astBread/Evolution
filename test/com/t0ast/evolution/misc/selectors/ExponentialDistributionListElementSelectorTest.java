@@ -5,6 +5,10 @@
  */
 package com.t0ast.evolution.misc.selectors;
 
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.junit.Test;
 
 /**
@@ -16,8 +20,10 @@ public class ExponentialDistributionListElementSelectorTest
     @Test
     public void testNextRandom()
     {
-        ExponentialDistributionListElementSelector sel = new ExponentialDistributionListElementSelector(100f);
-        for(int i = 0; i < 100; i++)
+        List l = IntStream.range(0, 100).boxed().collect(Collectors.toList());
+        ExponentialDistributionListElementSelector sel = new ExponentialDistributionListElementSelector();
+        Random r = new Random();
+        for(int i = 0; i < 1000; i++)
         {
             System.out.println(sel.nextRandom());
         }
