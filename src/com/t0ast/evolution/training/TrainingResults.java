@@ -11,16 +11,16 @@ import com.t0ast.evolution.entities.Entity;
  *
  * @author T0astBread
  */
-public abstract class TrainingResults
+public abstract class TrainingResults<E extends Entity>
 {
-    private Entity entity;
+    private E entity;
 
-    public TrainingResults(Entity entity)
+    public TrainingResults(E entity)
     {
         this.entity = entity;
     }
 
-    public Entity getEntity()
+    public E getEntity()
     {
         return entity;
     }

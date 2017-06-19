@@ -73,7 +73,7 @@ public class InstructionalMutator<E extends InstructionalEntity> implements Muta
     @Override // a:b:r = 6:3:1 +-2
     public E mutate(E parent1, E parent2) // 70/30 split Instruction size von p1 * 0,3 *math.random  = removed instructions ->  (p1*0,7+p2*0,3)*2*math.random
     {
-        System.out.println("Start");
+//        System.out.println("Start");
         double a=weightA-disturbance+disturbance*Math.random()*2;
         double b=weightB-disturbance+disturbance*Math.random()*2;
         double r=weightRandom-disturbance+disturbance*Math.random()*2;
@@ -101,24 +101,30 @@ public class InstructionalMutator<E extends InstructionalEntity> implements Muta
        {
        List<Instruction> list= entity.getInstructions();
        List<Instruction> from=parent1.getInstructions();
-           System.out.println("From A:"+from.size());
-           System.out.println("To :"+list.size());
+//           System.out.println("From A:"+from.size());
+//           System.out.println("To :"+list.size());
        
         for (int i = 0; i < instrA; i++) {
                     
-            System.out.println("not stuck a");
+//            System.out.println("not stuck a");
+
+            // IDK what happened here but apparently there seems to be a chance for a division/0
+            // Not written by me -w-
+            // -T0ast
+            
+            //TODO: FIX
             list.add(from.get(i%from.size()));     
         } 
         for (int i = instrA; i < (instrA+instrR); i++) {
-            System.out.println("not stuck r");
+//            System.out.println("not stuck r");
             list.add(generator.getRandomInstruction());
         }
         from=parent2.getInstructions();
-        System.out.println("From B:"+from.size());
-        System.out.println("To :"+list.size());
+//        System.out.println("From B:"+from.size());
+//        System.out.println("To :"+list.size());
         for (int i = instrA+instrR; i < (instrA+instrB+instrR); i++) {
                  
-            System.out.println("not stuck b");
+//            System.out.println("not stuck b");
             list.add(from.get(i%from.size()));
         }
        }
@@ -126,7 +132,7 @@ public class InstructionalMutator<E extends InstructionalEntity> implements Muta
        {
            
        }
-        System.out.println("End");
+//        System.out.println("End");
         
         return entity;
     }

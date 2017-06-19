@@ -30,6 +30,7 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
     private MutationType mutationType;
     private EntityGenerator<E> generator;
     private Set<Entity> haveBeenReproducingInThisGeneration;
+    private int generationIndex;
 
     public EvolvingPool(Trainer<E> trainer, int entitiesInGeneration, int deathsPerGeneration, ListElementSelector killSelector, ListElementSelector breedingSelector, Mutator<E> mutator, MutationType mutationType, EntityGenerator<E> generator)
     {
@@ -43,6 +44,7 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
         this.mutationType = mutationType;
         this.generator = generator;
         this.haveBeenReproducingInThisGeneration = new HashSet<>();
+        this.generationIndex = 1;
     }
     
     public EvolvingPool<E, R> initialize()
@@ -73,6 +75,8 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
         }
         this.entities.addAll(newEntitiesTemp);
         this.haveBeenReproducingInThisGeneration.clear();
+        
+        this.generationIndex++;
     }
     
     private E selectForBreeding()
@@ -95,6 +99,11 @@ public class EvolvingPool<E extends Entity, R extends TrainingResults>
     public List<E> getEntities()
     {
         return entities;
+    }
+    
+    public int getGenerationIndex()
+    {
+        return this.generationIndex;
     }
     
     public static enum MutationType

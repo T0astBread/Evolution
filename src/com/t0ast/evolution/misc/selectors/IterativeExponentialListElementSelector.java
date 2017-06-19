@@ -8,9 +8,9 @@ package com.t0ast.evolution.misc.selectors;
 import java.util.List;
 
 /**
- *
- * @author buchj This use a dynamic base, it takes the % chances for the first
+ * This use a dynamic base, it takes the % chances for the first
  * and last entry, and makes a exponential formula for the chance to be picked;
+ * @author buchj
  */
 public class IterativeExponentialListElementSelector implements ListElementSelector
 {// f(index)= base*factor^index
